@@ -1,0 +1,32 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'edit_spot_style.css' %}">{% endblock %}
+{% block title %}Редагування позиції{% endblock %}
+{% block content %}
+<form id="inp" action="{% url 'edit_spot' spot_id %}" method="post">
+    {% csrf_token %}
+    <input type="text" class="text_input" name="Width" value="{{ width }}" placeholder="Ширина(%)">
+    <input type="text" class="text_input" name="Height" value="{{ height }}" placeholder="Висота(%)">
+    <input type="text" class="text_input" name="Cost" value="{{ cost }}" placeholder="Ціна">
+    <label>Сторінка: </label>
+    <select name="Page" class="access">
+        <option value="1" {% if page == 1 %} selected {% endif %}>1</option>
+        <option value="2" {% if page == 2 %} selected {% endif %}>2</option>
+        <option value="3" {% if page == 3 %} selected {% endif %}>3</option>
+        <option value="4" {% if page == 4 %} selected {% endif %}>4</option>
+        <option value="5" {% if page == 5 %} selected {% endif %}>5</option>
+    </select><br>
+    <label>Положення: </label>
+    <select name="Position" class="access">
+        <option value="Зверху" {% if position == 'Зверху' %} selected {% endif %}>Зверху</option>
+        <option value="Знизу" {% if position == 'Знизу' %} selected {% endif %}>Знизу</option>
+        <option value="Справа" {% if position == 'Справа' %} selected {% endif %}>Справа</option>
+        <option value="Зліва" {% if position == 'Зліва' %} selected {% endif %}>Зліва</option>
+    </select>
+    <input type="submit" name="input_submit" class="submit" value="Зберегти"/>
+</form>
+{% if error_message != '' %}
+<p><b>{{ error_message }}</b></p>
+{% endif %}
+{% endblock %}

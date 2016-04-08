@@ -1,0 +1,31 @@
+.unselected{
+    text-decoration: none;
+    font-weight: bold;
+    color:#0072bc;
+    margin-right: 25px;
+}
+.selected{
+    background: #0092dc;
+    font-family:'Palatino Linotype';
+    border-radius:3px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color:#eee;
+}
+.info{
+    margin-top: 5px;
+    display:inline-block;
+    margin-left: 5px;
+}
+.link{
+    text-decoration: none;
+    font-weight: bold;
+    color:#0072bc;
+}

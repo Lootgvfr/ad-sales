@@ -1,0 +1,31 @@
+.orders{
+    border: 1px solid #aaa;
+    font-family: 'Palatino Linotype';
+    table-layout: fixed;
+    font-size: 14px;
+    border-collapse: collapse; 
+    margin-top: 10px;
+    margin: auto;
+}
+.caption{
+    border: 1px solid #aaa;
+}
+.id-content{
+    text-align:center;
+}
+.table-content{
+    text-align: center;
+}
+.table-content a{
+    text-decoration: none;
+    font-weight: bold;
+    color:#0072bc;
+    margin-left: 4px; 
+    margin-right: 4px;
+}
+.status{
+    width: 120px;
+    margin-left: 1px;
+    margin-bottom: 5px;
+    font-family: 'Palatino Linotype';
+}

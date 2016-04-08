@@ -1,0 +1,30 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'statistics_style.css' %}">{% endblock %}
+{% block title %}Продаж реклами{% endblock %}
+
+{% block content %}
+{% if success == 1 %}
+    {% if result %}
+        <label>Результат: </label><br>
+        <label> </label><br>
+        {% for name in result %}
+            <a class='res' href="{% url 'profile' name %}">{{ name }}</a><br>
+        {% endfor %}
+    {% else %}
+        <label>Нічого не знайдено.</label>
+    {% endif %}
+{% else %}
+    <form id="inp" action="{% url 'statistics' %}" method="post">
+        {% csrf_token %}
+        <input type="radio" name="var" value="var1" checked>Показати користувачів, сумарна вартість замовлень яких більша за:</input><br>
+        <input type="radio" name="var" value="var2">Показати користувачів, що зайняли позицій більше ніж:</input>
+        <input type="text" class="text_input" value="{{ value }}" name="Value">
+        <input type="submit" name="input_submit" class="submit" value="Показати" />
+    </form>
+    {% if error_message != '' %}
+    <p><b>{{ error_message }}</b></p>
+    {% endif %}
+{% endif %}
+{% endblock %}

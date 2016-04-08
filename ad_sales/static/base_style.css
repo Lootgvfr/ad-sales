@@ -1,0 +1,120 @@
+body {
+  font-family: 'Palatino Linotype';
+  padding: 0;
+  margin: 0;
+}
+
+.hdr{
+  background: #0072bc;
+  color: white;
+  min-width: 900px;
+}
+
+.menu{
+  height: 42px;
+  width: 900px;
+  margin: auto;
+}
+
+.buttons-left{
+  display: block;
+  position:relative;
+  float:left;
+  list-style-type: none;
+  height: 30px;
+  padding: 0px;
+  margin: 0px;
+  width:500px;
+  padding-left: 20px;
+}
+
+.buttons-left li{
+  display: relative;
+  float: left;
+  text-align: center; 
+}
+
+.buttons-left li a{
+  display: block;
+  color: #eee;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0px;
+  padding: 10px 15px 11px 15px;
+  -webkit-transition: all 0.08s;
+}
+
+.buttons-left li a:hover{
+  background: white;
+  color: #0072bc;
+}
+
+.buttons-right{
+  position: relative;
+  display: block;
+  float:right;
+  list-style-type: none;
+  height: 30px;
+  padding: 0px;
+  margin: 0px;
+  width: 360px;
+  padding-right: 20px;
+}
+
+.buttons-right .button{
+  display: relative;
+  float: right;
+  text-align: center;
+}
+
+.buttons-right .button a{
+  display: block;
+  color: #eee;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0px;
+  padding: 10px 15px 11px 15px;
+  -webkit-transition: all 0.08s;
+}
+
+.buttons-right .button a:hover{
+  background: white;
+  color: #0072bc;
+}
+
+.buttons-right .hello{
+    display: relative;
+    float: right;
+    color: #F8DE7E;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px 15px 11px 15px;
+}
+.buttons-right .hello a{
+    color: #F8DE7E;
+    font-size: 16px;
+}
+.content {
+  display: block;
+  width: 800px;
+  min-height: 50px;
+  margin: 0px;
+  padding: 0px;
+  margin: auto;
+  box-shadow: 3px 0 5px 0px #888, -2px 0 5px 0px #888;
+}
+
+.text{
+  padding: 10px 20px 10px 20px;
+  min-height: 300px;
+}
+
+.footer {
+  display: block;
+  bottom: 0;
+  text-align: center;
+  font-size: 13px;
+  width: 800px;
+  padding-bottom: 5px;
+  padding-top:10px;
+}

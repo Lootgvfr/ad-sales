@@ -1,0 +1,120 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'view_order_spots_style.css' %}">{% endblock %}
+{% block title %}
+    Інформація про замовлення
+{% endblock %}
+{% block content %}
+    <a class="unselected" href="{% url 'view_order' order_id %}">Загальна інформація</a>
+    <a class="unselected" href="{% url 'view_order_prototypes' order_id %}">Макети</a>
+    <a class="selected" href="{% url 'view_order_spots' order_id %}">Позиції в журналі</a><br>
+    {% if status == 'Завершено' %}
+        <p>Вибрані позиції: </p>
+    {% elif status == 'Очікування позицій' %}
+        <p>Запропоновані позиції:</p>
+    {% endif %}
+    {% if status == 'Очікування позицій' or status == 'Завершено' %}
+        {% if perms.ad_sales.add_spot %}
+            <table class="spots">
+                <tr>
+                    <th class="caption" width="50px">Стр.</th>
+                    <th class="caption" width="110px">Положення</th>
+                    <th class="caption" width="80px">Ширина</th>
+                    <th class="caption" width="80px">Висота</th>
+                    <th class="caption" width="100px">Стан</th>
+                    <th class="caption" width="100px">Ціна</th>
+                    <th class="caption" width="100px"></th>
+                </tr>
+                {% for spot in spots %}
+                <tr>
+                    <td class="table-content">
+                        {{ spot.page }}
+                    </td>
+                    <td class="table-content">
+                        {{ spot.position }}
+                    </td>
+                    <td class="table-content">
+                        {{ spot.width }}
+                    </td>
+                    <td class="table-content">
+                        {{ spot.height }}
+                    </td>
+                    <td class="table-content">
+                        {{ spot.status }}
+                    </td>
+                    <td class="table-content">
+                        {{ spot.cost }}
+                    </td>
+                    <td class="table-content">
+                        {% if spot.status == 'Запропонована' or spot.status == 'Зайнята' %}
+                            <a href="{% url 'free_spot' order_id spot.id %}">Звільнити</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% if status == 'Очікування позицій' %}
+                <p>Запропонувати нову позицію:</p>
+                <form action="{% url 'view_order_spots' order_id %}" method="post">
+                    {% csrf_token %}
+                    <select name="spot_id" class="sel">
+                        {% for spot in free_spots %}
+                        <option value="{{ spot.id }}">
+                            Стр: {{ spot.page }}, Положення: {{ spot.position }}, Ціна: {{ spot.cost }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" name="propose" class="propose" value="Запропонувати" />
+                </form>
+            {% endif %}
+        {% else %}
+            <form action="{% url 'view_order_spots' order_id %}" method="post">
+                {% csrf_token %}
+                <table class="spots">
+                    <tr>
+                        <th class="caption" width="50px">Стр.</th>
+                        <th class="caption" width="110px">Положення</th>
+                        <th class="caption" width="80px">Ширина</th>
+                        <th class="caption" width="80px">Висота</th>
+                        <th class="caption" width="100px">Стан</th>
+                        <th class="caption" width="100px">Ціна</th>
+                        {% if status == 'Очікування позицій' %}
+                        <th class="caption" width="30px"></th>
+                        {% endif %}
+                    </tr>
+                    {% for spot in spots %}
+                    <tr>
+                        <td class="table-content">
+                            {{ spot.page }}
+                        </td>
+                        <td class="table-content">
+                            {{ spot.position }}
+                        </td>
+                        <td class="table-content">
+                            {{ spot.width }}
+                        </td>
+                        <td class="table-content">
+                            {{ spot.height }}
+                        </td>
+                        <td class="table-content">
+                            {{ spot.status }}
+                        </td>
+                        <td class="table-content">
+                            {{ spot.cost }}
+                        </td>
+                        {% if status == 'Очікування позицій' %}
+                        <td class="table-content">
+                            <input type="checkbox" class="chk" name="checkbox{{ spot.id }}">
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% if status == 'Очікування позицій' %}
+                <input type="submit" name="chkb" class="chkb" value="Вибрати" />
+                {% endif %}
+            </form>
+        {% endif %} 
+    {% endif %}
+{% endblock %}

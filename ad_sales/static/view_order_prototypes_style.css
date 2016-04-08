@@ -1,0 +1,79 @@
+.unselected{
+    text-decoration: none;
+    font-weight: bold;
+    color:#0072bc;
+    margin-right: 25px;
+}
+.selected{
+    background: #0092dc;
+    font-family:'Palatino Linotype';
+    border-radius:3px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color:#eee;
+}
+.prototypes{
+    border: 1px solid #aaa;
+    font-family: 'Palatino Linotype';
+    table-layout: fixed;
+    font-size: 14px;
+    border-collapse: collapse; 
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.caption{
+    border: 1px solid #aaa;
+}
+.table-content{
+    text-align: center;
+}
+.table-content a{
+    text-decoration: none;
+    font-weight: bold;
+    color:#0072bc;
+}
+.submit{
+    display:block;
+    background: #0092dc;
+    margin-top:10px;
+    font-size:16px;
+    width:130px;
+    font-family:'Palatino Linotype';
+    border: 1px solid #333;
+    border-radius:3px;
+    color:#eee;
+}
+.submit:hover{
+    cursor:pointer;
+}
+.select{
+    display:block;
+    background: #0092dc;
+    font-size:14px;
+    margin: auto;
+    width:80px;
+    font-family:'Palatino Linotype';
+    border: 1px solid #333;
+    border-radius:3px;
+    color:#eee;
+}
+.select:hover{
+    cursor:pointer;
+}
+.text_input{
+    display:block;
+    width:350px;
+    font-size:16px;
+    font-family: 'Palatino Linotype';
+    margin: 5px 10px 5px 0px;
+    border: 1px solid #222;
+    padding-left:2px;
+    border-radius:2px;
+}

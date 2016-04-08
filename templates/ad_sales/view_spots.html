@@ -1,0 +1,55 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'view_spots_style.css' %}">{% endblock %}
+{% block title %}Список позицій в журналі{% endblock %}
+{% block content %}
+<select class="access" onChange="window.location.href=this.value;">
+    <option selected disabled>Сторінка</option>
+    {% for i in pages %}
+    <option value="{% url 'view_spots' i %}">{{ i }}</option>
+    {% endfor %}
+</select>
+<table class="spots">
+    <tr>
+        <th class="caption" width="50px">Стр.</th>
+        <th class="caption" width="110px">Положення</th>
+        <th class="caption" width="80px">Ширина</th>
+        <th class="caption" width="80px">Висота</th>
+        <th class="caption" width="100px">Стан</th>
+        <th class="caption" width="100px">Ціна</th>
+        <th class="caption" width="200px"></th>
+    </tr>
+    {% for spot in spots %}
+    <tr>
+        <td class="table-content">
+            {{ spot.page }}
+        </td>
+        <td class="table-content">
+            {{ spot.position }}
+        </td>
+        <td class="table-content">
+            {{ spot.width }}
+        </td>
+        <td class="table-content">
+            {{ spot.height }}
+        </td>
+        <td class="table-content">
+            {{ spot.status }}
+        </td>
+        <td class="table-content">
+            {{ spot.cost }}
+        </td>
+        <td class="table-content">
+            {% if spot.status == 'Вільна' %}
+                <a href="{% url 'edit_spot' spot.id %}">Редагувати</a>
+                <a href="{% url 'delete_spot' spot.id %}">Видалити</a>
+            {% else %}
+                <a href="{% url 'view_order_spots' spot.order_id %}">Замовлення</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a class="btn" href="{% url 'add_spot' %}">Додати позицію</a>
+{% endblock %}

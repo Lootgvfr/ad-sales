@@ -1,0 +1,18 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'login_style.css' %}">{% endblock %}
+{% block title %}Логін{% endblock %}
+
+{% block content %}
+<p>Введіть ваші дані для логіну.</p>
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <input type="text" class="name_input" name="Username" value="{{ username }}" placeholder="Логін">
+    <input type="password" class="password_input" name="Password" placeholder="Пароль" value="">
+    <input type="submit" class="submit" value="Зайти" />
+</form>
+{% if error_message != '' %}
+<p><b>{{ error_message }}</b></p>
+{% endif %}
+{% endblock %}

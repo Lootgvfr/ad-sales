@@ -1,0 +1,31 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'add_order_style.css' %}">{% endblock %}
+{% block script %}<script type="text/javascript" src="{% static 'add_order_script.js' %}"></script>{% endblock %}
+{% block title %}Оформлення замовлення{% endblock %}
+
+{% block content %}
+<p>Виберіть метод створення макету:</p>
+<input type="radio" name="input" value="inp" onclick="sel(1);" checked>Замовити макет</input>
+<input type="radio" name="input" value="upl" onclick="sel(2);" >Завантажити макет</input>
+<form id="inp" action="{% url 'add_order' %}" method="post">
+    {% csrf_token %}
+    <input type="text" class="text_input" name="Width" value="{{ width }}" placeholder="Ширина реклами(%)">
+    <input type="text" class="text_input" name="Height" value="{{ height }}" placeholder="Висота реклами(%)">
+    <textarea class="bigtext_input" name="Text" placeholder="Текст">{{ text }}</textarea>
+    <textarea class="bigtext_input" name="Layout" placeholder="Оформлення">{{ layout }}</textarea>
+    <textarea class="bigtext_input" name="Graph" placeholder="Опис графічних елементів">{{ graph }}</textarea>
+    <input type="submit" name="input_submit" class="submit" value="Оформити" />
+</form>
+<form id="upl" action="{% url 'add_order' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="text" class="text_input" name="Width" value="{{ width }}" placeholder="Ширина реклами(%)">
+    <input type="text" class="text_input" name="Height" value="{{ height }}" placeholder="Висота реклами(%)">
+    <input type="submit" name="upload_submit" class="submit" value="Відправити" />
+</form>
+{% if error_message != '' %}
+<p><b>{{ error_message }}</b></p>
+{% endif %}
+{% endblock %}

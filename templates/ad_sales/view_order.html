@@ -1,0 +1,17 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'view_order_style.css' %}">{% endblock %}
+{% block title %}
+    Інформація про замовлення
+{% endblock %}
+{% block content %}
+    <a class="selected" href="{% url 'view_order' order_id %}">Загальна інформація</a>
+    <a class="unselected" href="{% url 'view_order_prototypes' order_id %}">Макети</a>
+    <a class="unselected" href="{% url 'view_order_spots' order_id %}">Позиції в журналі</a><br>
+    <label class="info">Замовник: </label>
+    <a class="link" href="{% url 'profile' username %}">{{ username }}</a><br>
+    <label class="info">Дата оформлення: {{ date_recieved }}</label><br>
+    <label class="info">Дата виконання: {{ date_completed }}</label><br>
+    <label class="info">Стан замовлення: {{ status }}</label>
+{% endblock %}

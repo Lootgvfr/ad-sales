@@ -1,0 +1,52 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'view_orders_style.css' %}">{% endblock %}
+{% block title %}
+    {% if perms.ad_sales.add_spot %}
+        Список всіх замовлень
+    {% else %}
+        Список ваших замовлень
+    {% endif %}
+{% endblock %}
+{% block content %}
+<p>
+<label>Стан:</label>
+<select class="status" onChange="window.location.href=this.value;">
+    <option value="{% url 'view_orders' %}" selected>Всі</option>
+    <option value="{% url 'view_orders_filter' 'prototype' %}" {% if status == 'prototype' %} selected {% endif %}>Вибір макета</option>
+    <option value="{% url 'view_orders_filter' 'spots' %}" {% if status == 'spots' %} selected {% endif %}>Очікування позицій</option>
+    <option value="{% url 'view_orders_filter' 'completed' %}" {% if status == 'completed' %} selected {% endif %}>Завершено</option>
+</select>
+</p>
+<table class="orders">
+    <tr>
+        <th class="caption" width="50px">ID</th>
+        <th class="caption" width="130px">Користувач</th>
+        <th class="caption" width="130px">Дата прийняття</th>
+        <th class="caption" width="200px">Стан</th>
+        <th class="caption" width="200px"></th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td class="id-content">
+            {{ order.id }}
+        </td>
+        <td class="table-content">
+            {{ order.user }}
+        </td>
+        <td class="table-content">
+            {{ order.date }}
+        </td>
+        <td class="table-content">
+            {{ order.status }}
+        </td>
+        <td class="table-content">
+            <a href="{% url 'view_order' order.id %}">Перейти</a>
+            <a href="{% url 'delete_order' order.id %}">Видалити</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<div>{{ rows }}</div>
+{% endblock %}

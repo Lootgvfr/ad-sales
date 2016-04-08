@@ -1,0 +1,70 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Продаж реклами{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'base_style.css' %}">
+  {% block css %}{% endblock %}
+</head>
+<body>
+<header class="hdr">
+  <div class="menu">
+    <ul class="buttons-right">
+      {% if user.is_authenticated %}
+      <li class="button">
+        <a href="{% url 'logout' %}">Вийти</a>
+      </li>
+      {% if perms.ad_sales.add_spot %}
+      <li class="button">
+        <a href="{% url 'statistics' %}">Статистика</a>
+      </li>
+      {% endif %}
+      <li class="hello">
+        Привіт, <a href="{% url 'profile' user.username %}">{{ user.username }}</a>!
+      </li>     
+      {% else %}
+      <li class="button">
+        <a href="{% url 'register' %}">Реєстрація</a>
+      </li>
+      <li class="button">
+        <a href="{% url 'login' %}">Логін</a>
+      </li>
+      {% endif %}
+    </ul>
+    <ul class="buttons-left">
+      <li>
+        <a href="{% url 'home' %}">Головна сторінка</a>
+      </li>
+      {% for group in user.groups.all %}
+        {% if group.name == 'User' %}
+            <li>
+              <a href="{% url 'add_order' %}">Замовити</a>
+            </li>
+        {% endif %}
+      {% endfor %}
+      {% if user.is_authenticated %}
+      <li>
+        <a href="{% url 'view_orders' %}">Список замовлень</a>
+      </li>
+      {% endif %}
+      {% if perms.ad_sales.add_spot %}
+      <li>
+        <a href="{% url 'view_spots_index' %}">Позиції в журналі</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</header>
+<div class="content">
+  <div class="text">
+    {% block content %}{% endblock %}
+  </div>
+  <div class="footer">
+    Курсова робота "Розміщення реклами в журналі"<br>
+    Розробник: Зоц Данієль, гр. ІС-32
+  </div>
+</div>
+{% block script %}{% endblock %}
+</body>
+</html>

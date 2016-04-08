@@ -1,0 +1,99 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'view_order_prototypes_style.css' %}">{% endblock %}
+{% block title %}
+    Інформація про замовлення
+{% endblock %}
+{% block content %}
+    <a class="unselected" href="{% url 'view_order' order_id %}">Загальна інформація</a>
+    <a class="selected" href="{% url 'view_order_prototypes' order_id %}">Макети</a>
+    <a class="unselected" href="{% url 'view_order_spots' order_id %}">Позиції в журналі</a><br>
+    {% if status == 'Вибір макета' %}
+        <p>Запрошений макет:</p>
+        <p>Ширина і висота: {{ prototype.width }}%, {{ prototype.height }}%<br>
+        Текст: {{ prototype.text }}<br>
+        Оформлення: {{ prototype.layout }}<br>
+        Графічні елементи: {{ prototype.desc_graphical }}</p>
+        <label>Запропоновані макети:</label>
+        {% if perms.ad_sales.add_spot %}
+            <table class="prototypes">
+                <tr>
+                    <th class="caption" width="100px">Ширина</th>
+                    <th class="caption" width="100px">Висота</th>
+                    <th class="caption" width="150px">Файл</th>
+                </tr>
+                {% for pic in prototypes %}
+                <tr>
+                    <td class="table-content">
+                        {{ pic.width }}
+                    </td>
+                    <td class="table-content">
+                        {{ pic.height }}
+                    </td>
+                    <td class="table-content">
+                        <a href="{% url 'download' pic.id %}">Завантажити</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <form id="upl" action="{% url 'view_order_prototypes' order_id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <input type="text" class="text_input" name="Width" value="{{ width }}" placeholder="Ширина реклами(%)">
+                <input type="text" class="text_input" name="Height" value="{{ height }}" placeholder="Висота реклами(%)">
+                <input type="submit" name="upload_submit" class="submit" value="Запропонувати" />
+            </form>
+        {% else %}
+            <form action="{% url 'view_order_prototypes' order_id %}" method="post">
+                {% csrf_token %}
+                <table class="prototypes">
+                    <tr>
+                        <th class="caption" width="100px">Ширина</th>
+                        <th class="caption" width="100px">Висота</th>
+                        <th class="caption" width="150px">Файл</th>
+                        <th class="caption" width="150px"></th>
+                    </tr>
+                    {% for pic in prototypes %}
+                    <tr>
+                        <td class="table-content">
+                            {{ pic.width }}
+                        </td>
+                        <td class="table-content">
+                            {{ pic.height }}
+                        </td>
+                        <td class="table-content">
+                            <a href="{% url 'download' pic.id %}">Завантажити</a>
+                        </td>
+                        <td class="table-content">
+                            <input type="submit" name="select{{ pic.id }}" class="select" value="Вибрати"/>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        {% endif %}
+    {% else %}
+        <label>Затверждений макет:</label>
+        <table class="prototypes">
+            <tr>
+                <th class="caption" width="100px">Ширина</th>
+                <th class="caption" width="100px">Висота</th>
+                <th class="caption" width="150px">Файл</th>
+            </tr>
+            {% for pic in prototypes %}
+            <tr>
+                <td class="table-content">
+                    {{ pic.width }}
+                </td>
+                <td class="table-content">
+                    {{ pic.height }}
+                </td>
+                <td class="table-content">
+                    <a href="{% url 'download' pic.id %}">Завантажити</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

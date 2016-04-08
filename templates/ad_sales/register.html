@@ -1,0 +1,22 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'register_style.css' %}">{% endblock %}
+{% block title %}Реєстрація{% endblock %}
+
+{% block content %}
+<p>Введіть дані для реєстрації.</p>
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <input type="text" class="name_input" name="Name" value="{{ name }}" placeholder="ПІБ">
+    <input type="text" class="email_input" name="Email" value="{{ email }}" placeholder="E-mail">
+    <input type="text" class="phone_input" name="Phone" value="{{ phone }}" placeholder="Номер телефону">
+    <input type="text" class="name_input" name="Username" value="{{ username }}" placeholder="Логін">
+    <input type="password" class="password_input" name="Password" placeholder="Пароль" value="">
+    <input type="password" class="password_input" name="Password_repeat" placeholder="Повторіть пароль" value="">
+    <input type="submit" class="submit" value="Зареєструватись" />
+</form>
+{% if error_message != 'Name' %}
+<p><b>{{ error_message }}</b></p>
+{% endif %}
+{% endblock %}

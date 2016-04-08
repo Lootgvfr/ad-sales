@@ -1,0 +1,14 @@
+{% extends "ad_sales/base.html" %}
+{% load staticfiles %}
+<meta charset="utf-8">
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'profile_style.css' %}">{% endblock %}
+{% block title %}
+    Інформація про замовлення
+{% endblock %}
+{% block content %}
+    <div class="title">{{ username }}</div>
+    <label class="info">Повне ім'я: {{ name }}</label><br>
+    <label class="info">E-mail: {{ email }}</label><br>
+    <label class="info">Номер телефону: {{ phone }}</label><br>
+    <label class="info">Група користувачів: {{ groupname }}</label>
+{% endblock %}

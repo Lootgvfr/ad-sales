@@ -1,0 +1,33 @@
+.text_input{
+    display:block;
+    width:120px;
+    font-size:16px;
+    font-family: 'Palatino Linotype';
+    margin: 5px 10px 5px 0px;
+    margin-left: 5px;
+    border: 1px solid #222;
+    padding-left:2px;
+    border-radius:2px;
+}
+.submit{
+    display:block;
+    background: #0092dc;
+    margin-top:10px;
+    font-size:16px;
+    width:120px;
+    margin-left: 5px;
+    font-family:'Palatino Linotype';
+    border: 1px solid #333;
+    border-radius:3px;
+    color:#eee;
+}
+.submit:hover{
+    cursor:pointer;
+}
+.res{
+    text-decoration: none;
+    font-weight: bold;
+    color:#0072bc;
+    margin-left: 4px; 
+    margin-right: 4px;
+}

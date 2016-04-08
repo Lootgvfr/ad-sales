@@ -1,0 +1,43 @@
+.spots{
+    border: 1px solid #aaa;
+    font-family: 'Palatino Linotype';
+    table-layout: fixed;
+    font-size: 14px;
+    border-collapse: collapse; 
+    margin-top: 10px;
+    margin: auto;
+}
+.caption{
+    border: 1px solid #aaa;
+}
+.id-content{
+    text-align:center;
+}
+.table-content{
+    text-align: center;
+}
+.table-content a{
+    text-decoration: none;
+    font-weight: bold;
+    color:#0072bc;
+    margin-left: 4px; 
+    margin-right: 4px;
+}
+.access{
+    width: 100px;
+    margin-left: 1px;
+    margin-bottom: 5px;
+    font-family: 'Palatino Linotype';
+}
+.btn{
+    display:block;
+    background: #0072bc;
+    margin-top:20px;
+    padding: 3px 10px 2px 10px;
+    border-radius:3px;
+    color:#eee;
+    width:150px;
+    text-align:center;
+    text-decoration: none;
+    margin-left:1px;
+}
