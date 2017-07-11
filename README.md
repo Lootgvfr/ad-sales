@@ -1,2 +1,3 @@
-# DB course work
-# Site for managing ad sales in a magazine
+# Very old project
+# Coursework
+Site for managing ad sales in a magazine
